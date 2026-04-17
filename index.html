@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neural Gacha: Acheron</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="main-body">
+
+<div class="game-container">
+    <div id="overlay">
+        <div class="card" id="overlay-content"></div>
+    </div>
+
+    <div class="hud">
+        <div class="stat">GEMS: <span class="val" id="gems">0</span></div>
+        <div class="stat" style="text-align:right">SECTOR: <span class="val" id="sector">1</span></div>
+        <div class="stat">RESONANCE: <span class="val" id="resonance">0</span></div>
+        <div class="stat" style="text-align:right">DIVINE HIST: <span class="val" id="divine-pwr">0</span></div>
+    </div>
+
+    <div class="viewport" id="viewport-cont">
+        <div id="battle-log"><div>SYSTEM INITIALIZED...</div></div>
+        
+        <div class="loadout" id="loadout-ui"></div>
+
+        <div class="battle-area">
+            <div class="unit enemy" id="enemy-ui">
+                <div id="e-name" class="enemy-label">---</div>
+                <div class="bar-bg">
+                    <div id="e-hp" class="bar-fill hp-color"></div>
+                </div>
+                <div id="e-img" class="sprite-large"></div>
+            </div>
+
+            <div class="unit player">
+                <div class="sprite-large">🛡️</div>
+                <div class="bar-bg"><div id="p-hp" class="bar-fill hp-color"></div></div>
+                <div class="bar-bg"><div id="p-pp" class="bar-fill pp-color"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="codex" class="menu">
+        <h2 style="color:var(--text)">ACHERON DATA HISTORY</h2>
+        <div id="codex-list" class="grid-2"></div>
+        <button onclick="game.toggle('codex')" class="btn-full" style="margin-top: 20px;">CLOSE DATA STREAM</button>
+    </div>
+
+    <div class="controls">
+        <div id="lobby-ui" class="controls-grid">
+            <button onclick="game.pull()">PULL (50G)</button>
+            <button onclick="game.toggle('codex')">CODEX</button>
+            <button class="btn-battle" onclick="game.startBattle()">ENGAGE SECTOR</button>
+            <button onclick="game.wipeRequest()" class="btn-reset">SYSTEM OPTIONS</button>
+        </div>
+
+        <div id="battle-ui" class="controls-grid" style="display:none;">
+            <button id="atk-heavy" onclick="game.attack('heavy')">HEAVY (15PP)</button>
+            <button id="atk-focus" onclick="game.attack('focus')">FOCUS (+PP)</button>
+            <button id="atk-heal" onclick="game.attack('heal')" class="btn-heal">REPAIR UNIT</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

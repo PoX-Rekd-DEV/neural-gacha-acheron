@@ -1,0 +1,83 @@
+:root {
+    --bg: #020205; --panel: #0a0a15; --text: #00f2ff;
+    --red: #ff3333; --gold: #fbc531; --blue: #0f3460;
+    --glass: rgba(0, 242, 255, 0.05);
+}
+
+body { 
+    margin: 0; background: var(--bg); color: #fff; 
+    font-family: 'Courier New', monospace; overflow: hidden; 
+    height: 100vh; display: flex; justify-content: center; 
+}
+
+/* CRT Scanline Effect */
+body::after {
+    content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px; pointer-events: none; z-index: 9999;
+}
+
+.game-container { 
+    width: 100%; max-width: 450px; background: var(--panel); 
+    border: 1px solid #222; display: flex; flex-direction: column; position: relative; 
+}
+
+#battle-log {
+    height: 60px; font-size: 0.65rem; color: #888; overflow: hidden;
+    background: rgba(0,0,0,0.5); border: 1px solid #222; 
+    padding: 5px; margin-bottom: 10px; display: flex; flex-direction: column-reverse;
+}
+
+.hud { padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; background: #000; border-bottom: 1px solid #333; }
+.stat { font-size: 0.6rem; color: #666; }
+.val { color: var(--text); font-weight: bold; }
+
+.viewport { flex: 1; padding: 15px; display: flex; flex-direction: column; }
+.loadout { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+.slot { 
+    background: var(--glass); border: 1px solid #333; height: 130px;
+    border-radius: 4px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; font-size: 0.5rem; text-align: center;
+}
+.slot b { font-size: 1.5rem; display: block; }
+
+/* Rarity Glows */
+.r-4 { border-color: #9b59b6; box-shadow: inset 0 0 10px #9b59b644; }
+.r-5 { border-color: var(--gold); box-shadow: 0 0 15px var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+.battle-area { flex: 1; display: flex; flex-direction: column; justify-content: space-around; }
+.unit { transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.enemy { transform: translateX(100px); opacity: 0; }
+.active .enemy { transform: translateX(0); opacity: 1; }
+
+.sprite-large { font-size: 3rem; margin: 10px 0; text-align: center; }
+.bar-bg { width: 100%; height: 8px; background: #111; border: 1px solid #333; margin: 4px 0; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; width: 100%; transition: 0.4s; }
+.hp-color { background: var(--red); box-shadow: 0 0 10px var(--red); }
+.pp-color { background: var(--text); box-shadow: 0 0 10px var(--text); }
+
+.controls { padding: 15px; background: #000; border-top: 1px solid #222; }
+.controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+button { 
+    padding: 12px; border: 1px solid #444; background: #111; color: #fff;
+    font-family: inherit; font-size: 0.7rem; cursor: pointer; border-radius: 4px;
+}
+button:disabled { opacity: 0.3; }
+.btn-battle { background: var(--red); grid-column: span 2; font-weight: bold; }
+
+.menu { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--panel); z-index: 5000; padding: 20px; display: none; flex-direction: column; box-sizing: border-box;
+}
+
+#overlay { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 9000; display: none; 
+    flex-direction: column; justify-content: center; align-items: center; 
+}
+
+.glitch { animation: glitch 0.2s infinite; }
+@keyframes glitch { 0% { transform: translate(0); } 50% { transform: translate(-5px, 3px); filter: hue-rotate(90deg); } 100% { transform: translate(0); } }
+
